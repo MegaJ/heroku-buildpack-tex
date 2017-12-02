@@ -59,6 +59,8 @@ if [ ! "$(which pdflatex)" ]; then
       echo "TEXMFHOME $TEXLIVE_HOME/var/texmf";
       echo "TEXMFLOCAL $TEXLIVE_HOME/texmf-local";
       echo "TEXMFSYSCONFIG $TEXLIVE_HOME/texmf-config";
+g
+
       echo "TEXMFSYSVAR $TEXLIVE_HOME/texmf-var";
       echo "TEXMFVAR $TEXLIVE_HOME/var/texmf-var";
     } >> "$PROF"
@@ -80,27 +82,15 @@ if [ -f "$BUILD_DIR/texlive.packages" ]; then
     tlmgr install $(cat "$BUILD_DIR/texlive.packages")
 fi
 
-# for some reason the above block of code doesn't work.
-build-step "Installing Open Journals-specific packages"
+tlmgr install fontawesome
+tlmgr install xltxtra
+tlmgr install parskip
+tlmgr install marvosym
+tlmgr install ifsym
+tlmgr install soul
+tlmgr install enumitem
 
-tlmgr install collection-xetex
-tlmgr install marginnote
-tlmgr install xcolor
-tlmgr install preprint
-tlmgr install etoolbox
-tlmgr install titlesec
-tlmgr install pgf
-tlmgr install caption
-tlmgr install tcolorbox
-tlmgr install environ
-tlmgr install trimspaces
-tlmgr install seqsplit
-tlmgr install biblatex
-tlmgr install logreq
-tlmgr install xstring
-tlmgr install mathspec
-tlmgr install fontspec
-tlmgr install xkeyval
+build-step "Installing Open Journals-specific packages"
 
 build-step "Updating installed packages..."
 tlmgr update --all
